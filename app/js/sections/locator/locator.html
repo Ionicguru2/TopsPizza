@@ -1,0 +1,20 @@
+<ion-view view-title="Locator" hide-nav-bar="true" class="bg">
+  <ion-content padding="true" scroll="false">
+    <div class="animated bounceInDown row">
+      <div class="col text-center">
+        <img src="img/theme/logo-on-color.png" class="logo">
+        <form name="searchStoreForm" ng-submit="vm.searchStore()" ng-hide="noInet">
+          <label class="item item-input">
+            <i class="icon ion-location placeholder-icon"></i>
+            <input class="to-uppercase" type="text" placeholder="Please Enter Postcode" required ng-model="vm.postcode">
+          </label>
+          <button type="submit" class="button button-full button-assertive" ng-disabled="searchStoreForm.$invalid">
+            Order Now
+          </button>
+          <p class="orLine">or</p>
+          <a ui-sref="tab.stores" class="light">Select Store from the list</a>
+        </form>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

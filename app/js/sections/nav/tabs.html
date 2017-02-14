@@ -1,0 +1,37 @@
+  <ion-tabs class="tabs-icon-top tabs-color-active-positive {{hideTabs}}">
+
+  <!-- hidden Tabs (products, product etc...) -->
+  <ion-tab title="hidden" href="#/tab/hidden" hidden="true">
+    <ion-nav-view name="tab-hidden"></ion-nav-view>
+  </ion-tab>
+
+
+  <!-- Home Tab -->
+  <ion-tab title="Home" icon-off="ion-ios-home-outline" icon-on="ion-ios-home"  ui-sref="tab.home">
+    <ion-nav-view name="tab-home"></ion-nav-view>
+  </ion-tab>
+
+  <!-- Menu Tab -->
+  <ion-tab title="Menu" icon-off="ion-pizza" icon-on="ion-pizza"  ui-sref="tab.menu">
+    <ion-nav-view name="tab-menu"></ion-nav-view>
+  </ion-tab>
+
+  <!-- Basket Tab -->
+  <ion-tab title="Your Order" icon-off="ion-ios-cart-outline" icon-on="ion-ios-cart" ng-click="vm.changeTab(3)"
+           badge="vm.order.cart.length" badge-style="badge-assertive" ng-class="{animated:vm.order.cart.length, bounce:vm.order.cart.length}">
+    <ion-nav-view name="tab-basket"></ion-nav-view>
+  </ion-tab>
+
+  <!-- Deals Tab -->
+  <ion-tab title="Meal Deals" icon-off="ion-ios-people-outline" icon-on="ion-ios-people" ui-sref="tab.deals">
+    <ion-nav-view name="tab-deals"></ion-nav-view>
+  </ion-tab>
+
+  <!-- More Tab -->
+  <ion-tab title="More" icon-off="ion-ios-more-outline" icon-on="ion-ios-more" ui-sref="tab.more">
+    <ion-nav-view name="tab-more"></ion-nav-view>
+  </ion-tab>
+
+
+
+</ion-tabs>

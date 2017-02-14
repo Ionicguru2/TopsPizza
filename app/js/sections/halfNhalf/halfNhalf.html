@@ -1,0 +1,54 @@
+<ion-view view-title="Hello Pizza Lover">
+  <ion-nav-buttons side="left">
+    <button class="button back-button buttons button-clear header-item" ng-click="vm.goBack()">
+      <i class="icon ion-ios-arrow-back"></i>
+    </button>
+  </ion-nav-buttons>
+  <ion-content>
+    <div class="list" class="item item-thumbnail-left item-icon-right">
+
+      <div class="product" ng-click="img = !img" ng-class="{animated: vm.product, bounceInRight:vm.product, animated:img, enlarge:img, flipInY:img }">
+        <img ng-src="https://topspizza.co.uk/img/products/halfnHalf.jpg" err-src="img/theme/no-picture.png">
+        <div>
+          <h1>HALF & HALF</h1>
+        </div>
+      </div>
+
+      <i class="list" ng-if="vm.sizes && !vm.deal">
+          <label class="item item-input item-select">
+            <div class="input-label">Qty</div>
+            <select ng-model="vm.orderItem.qty" ng-options="qty for qty in vm.qty" ng-change="vm.recalcPrice()"></select>
+          </label>
+          <label class="item item-input item-select">
+            <div class="input-label">
+             {{ (vm.orderItem.sum + vm.orderItem.addSum) > 0 ?  (((vm.orderItem.sum + vm.orderItem.addSum) * vm.orderItem.qty)| currency:"£") : 'Size'  }}
+              </div>
+            <select ng-model="vm.orderItem.size" ng-options="size for size in vm.sizes" ng-change="vm.recalcPrice()"></select>
+          </label>
+        </i>
+
+      <div ng-repeat="item in vm.items track by $index">
+        <div class="item item-button-right item-icon-left" ng-class="{active: vm.isGroupShown(item.id)}">
+          <i class="icon" ng-class="{'ion-checkmark-circled':item.selected ,'ion-plus':!item.selected}"></i>
+          <p ng-click="vm.toggleGroup(item.id)">
+            {{!item.selected?'Please select your pizza' : item.selected.name}}
+          </p>
+          <!--{{(item.id+1==1 && !item.selected)?'first half':'second half'}}-->
+          <button class="button button-balanced ion-ios-gear-outline" ng-if="item.selected && item.category=='pizza' && !vm.isGroupShown(item.id)" ng-click="vm.customiseProduct(item)"></button>
+
+        </div>
+
+        <ion-list ng-if="item.type=='type' && vm.isGroupShown(item.id)">
+            <ion-radio ng-repeat="product in item.items" ng-click="vm.setSelected(item, product)" ng-model="choice" ng-value="product.id" class="item-thumbnail-left item-text-wrap">
+              <img ng-src="https://topspizza.co.uk/img/products/thumbnail/{{product.id}}.jpg" err-src="img/theme/no-picture.png"> {{product.name}}
+            </ion-radio>
+        </ion-list>
+
+      </div>
+
+      <button class="button button-large button-full button-assertive icon-left ion-ios-cart" ng-click="vm.addToOrder()" ng-disabled="vm.allselect != 2">
+        {{ vm.addOrder }}
+      </button>
+    </div>
+  </ion-content>
+</ion-view>

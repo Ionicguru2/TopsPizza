@@ -1,0 +1,31 @@
+.Loyalty {
+	padding: 10px;
+}
+
+.points {}
+
+.points .current {
+	font-size: 5rem;
+	padding: 20px;
+	display: block;
+}
+
+.topsman {
+	background-color: rgba(0, 0, 0, .5);
+	background-image: url('../img/theme/topsman.jpg');
+	float: right;
+	background-size: cover;
+	width: 150px;
+	height: 156px;
+	display: block;
+	margin: auto;
+}
+
+.flip {
+	-moz-transform: scaleX(-1);
+	-o-transform: scaleX(-1);
+	-webkit-transform: scaleX(-1);
+	transform: scaleX(-1);
+	filter: FlipH;
+	-ms-filter: "FlipH";
+}

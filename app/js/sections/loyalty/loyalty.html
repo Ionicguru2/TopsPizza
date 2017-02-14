@@ -1,0 +1,29 @@
+<ion-view view-title="Hello Pizza Lover">
+	<ion-content>
+		<div>
+			<brand-effect />
+		</div>
+		<div class="padding">
+			<div class="Loyalty">
+				<div ng-show="vm.loyalty == 0">
+					<h1>Free Pizza with Tops Rewards</h1>
+					<span class="topsman flip"></span>
+					<p>With Online Tops Rewards, it's easy to get rewarded for being loyal to Tops Pizza. the more you order, the more points you earn! and when you've racked up at least 1,000 points, just redeem a completely FREE PIZZA on us.</p>
+				</div>
+				<div class="points" ng-show="vm.loyalty<1000 && vm.loyalty> 0">
+					<h1>YOU'RE ON YOUR WAY</h1>
+					<span class="current">{{vm.loyalty}}</span>
+					<p>Earn 1000 Points to claim your free pizza
+						<br>Only {{1000-vm.loyalty}} Points to go !</p>
+				</div>
+				<div class="points" ng-show="vm.loyalty >= 1000">
+					<h1>HAVE A PIZZA ON US</h1> your points
+					<span class="current">{{vm.loyalty}}</span>
+					<p>Claim your free pizza now</p>
+					<button class="button button-block button-assertive" ng-click="vm.orderNow()">ORDER NOW</button>
+				</div>
+
+			</div>
+		</div>
+	</ion-content>
+</ion-view>

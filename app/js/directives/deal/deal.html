@@ -1,0 +1,58 @@
+<div>
+
+  <div ng-hide="customise">
+    <div class="list card" ng-class="{animated: deal, bounceInRight:deal}"
+    class="item item-thumbnail-left item-icon-right">
+
+
+
+          <div class="item">
+            <h1>{{deal.name}} <span class="price">{{deal.price}}</span></h1>
+            {{deal.description}}
+          </div>
+
+          <ion-list>
+
+            <div ng-repeat="item in dealItems track by $index">
+
+              <ion-item class="item-stable"
+                ng-click="toggleGroup($index)"
+                ng-class="{active: isGroupShown($index)}">
+                <i class="icon" ng-class="isGroupShown($index) ? 'ion-minus' : 'ion-plus'"></i>
+                &nbsp;
+                <span ng-hide="item.selected">Please select your {{item.category}}</span>
+                <span ng-show="item.selected">{{item.selected}}</span>
+              </ion-item>
+
+              <ion-item
+                class="item-accordion"
+                ng-if="item.category=='pizza'"
+                ng-show="item.selected && !isGroupShown($index)">
+                  Customise your {{item.category}}
+              </ion-item>
+
+              <ion-item
+                class="item-accordion"
+                ng-if="item.type=='type'"
+                ng-show="isGroupShown($index)" lazy-scroll>
+
+                  <ion-radio ng-repeat="product in item.items" ng-click="(item.selected = product.name) && toggleGroup($index)" ng-model="choice" ng-value="product.id" class="item-thumbnail-left item-icon-right">
+                    <img image-lazy-src="http://topspizza.co.uk/img/products/{{product.id}}.jpg" err-src="img/theme/no-picture.png">
+                    {{product.name}}
+                    <div class="icon ion-arrow-right-a muted"></div>
+                  </ion-radio>
+              </ion-item>
+
+
+        </div>
+    </ion-list>
+
+
+          <button class="button button-full button-assertive">
+            <i class="icon ion-android-cart"></i>
+            ADD TO ORDER
+          </button>
+    </div>
+  </div>
+
+</div>

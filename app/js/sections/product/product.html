@@ -1,0 +1,115 @@
+<ion-view view-title="Hello Pizza Lover">
+  <ion-nav-buttons side="left">
+    <button class="button back-button button-clear header-item" ng-click="vm.goBack()" ng-hide="vm.customise">
+      <i class="icon ion-ios-arrow-back"></i>
+    </button>
+    <button class="button button-clear icon-left" ng-if="vm.showBase" ng-click="vm.showContent(0)"><i
+      class="icon ion-ios-arrow-back"></i>&nbsp;&nbsp;&nbsp;&nbsp;Change your crust
+    </button>
+    <button class="button button-clear  icon-left" ng-if="vm.showToppings" ng-click="vm.showContent(0)"><i
+      class="icon ion-ios-arrow-back"></i>&nbsp;&nbsp;&nbsp;&nbsp; Customise your pizza
+    </button>
+  </ion-nav-buttons>
+  <ion-content>
+    <div ng-hide="vm.customise">
+      <div class="product" ng-click="img = !img"
+           ng-class="{animated: vm.product, bounceInRight:vm.product, animated:img, enlarge:img, flipInY:img }">
+        <img ng-src="https://topspizza.co.uk/img/products/{{::vm.product.id}}.jpg" err-src="img/theme/no-picture.png">
+        <div>
+          <h1>{{vm.product.name}}</h1>
+          <p>{{vm.product.description}}</p>
+        </div>
+      </div>
+      <div class="button-bar" ng-if="vm.product.category == 'pizza'">
+        <button class="button icon-left ion-chevron-left button-dark" ng-click="vm.showContent(1)">
+          Crust
+        </button>
+        <button class="button icon-right ion-chevron-right button-dark" ng-click="vm.showContent(2)">
+          Toppings
+        </button>
+      </div>
+      <label class="item item-input item-select" ng-if="!vm.deal">
+        <div class="input-label">Qty</div>
+        <select ng-model="vm.orderItem.qty" ng-options="qty for qty in vm.qty" ng-change="vm.recalcPrice()"></select>
+      </label>
+      <label class="item item-input item-select" ng-if="!vm.deal">
+        <div class="input-label">
+          {{ (vm.orderItem.sum + vm.orderItem.addSum) > 0 ? (((vm.orderItem.sum + vm.orderItem.addSum) *
+          vm.orderItem.qty)| currency:"£") : 'Size' }}
+        </div>
+        <select ng-model="vm.orderItem.size" ng-options="size.label for size in vm.stateItem.sizes"
+                ng-change="vm.recalcPrice()"></select>
+      </label>
+
+      <button class="item button button-large button-full button-assertive icon-left ion-ios-cart"
+              ng-click="vm.addToOrder()">
+        {{vm.addOrder}}
+      </button>
+
+    </div>
+    <div ng-class="{animated: vm.customise, bounceInRight:vm.customise}" ng-show="vm.showBase">
+
+      <ion-radio ng-repeat="base in vm.toppings.base" ng-click="vm.setBaseSelected(base)" ng-model="vm.choice"
+                 ng-value="base.id" class="item-thumbnail-left item-text-wrap">
+        <img ng-src="https://topspizza.co.uk/img/theme/bases/{{base.id}}.png" err-src="img/theme/no-picture.png"
+             alt="{{base.name}}"> {{base.name}}
+      </ion-radio>
+
+    </div>
+    <div class="list" ng-show="vm.showToppings">
+      <!--ng-class="{animated: vm.customise, bounceInRight:vm.customise}"-->
+
+
+      <div class="button-bar">
+        <!--<a class="button button-small" ng-class="{'button-assertive': !vm.isActiveCtrl('base')}" ng-click="vm.setActiveCtrl('base')" ng-disabled="vm.orderItem.size=='small'">BASE</a>-->
+        <a class="button " ng-class="{'button-assertive': !(vm.showToppings=='sauce')}"
+           ng-click="vm.showToppings = 'sauce'">SAUCE</a>
+        <a class="button " ng-class="{'button-assertive': !(vm.showToppings=='cheese')}"
+           ng-click="vm.showToppings = 'cheese'">CHEESE</a>
+        <a class="button " ng-class="{'button-assertive': !(vm.showToppings=='toppings')}"
+           ng-click="vm.showToppings = 'toppings'">TOPPINGS</a>
+      </div>
+
+      <div ng-show="vm.showToppings=='sauce'">
+        <div class="item" ng-repeat="sauce in vm.toppings.sauce track by $index">
+          <tribox change-qty="vm.changeQty" topping="sauce"/>
+        </div>
+      </div>
+
+      <div ng-show="vm.showToppings=='cheese'">
+        <div class="item" ng-repeat="cheese in vm.toppings.cheese">
+          <tribox change-qty="vm.changeQty" topping="cheese"/>
+        </div>
+      </div>
+
+      <div ng-show="vm.showToppings=='toppings'">
+
+        <div class="item" ng-repeat="fish in vm.toppings.fish">
+          <tribox change-qty="vm.changeQty" topping="fish"/>
+        </div>
+        <div class="item" ng-repeat="meat in vm.toppings.meat">
+          <tribox change-qty="vm.changeQty" topping="meat"/>
+        </div>
+        <div class="item" ng-repeat="veg in vm.toppings.veg">
+          <tribox change-qty="vm.changeQty" topping="veg"/>
+        </div>
+      </div>
+
+      <!--<div class="row">
+          <div class="col">
+              <button class="button button-full" ng-click="vm.resetToppings()">Reset toppings</button>
+          </div>
+          <div class="col">
+              <button class="button button-full button-assertive" ng-click="vm.showContent(0)">Save</button>
+          </div>
+      </div>-->
+    </div>
+
+  </ion-content>
+  <ion-footer-bar class="bar-light prod-nav-bar" ng-if="vm.showToppings">
+    <div class="button-bar">
+      <button class="item button button-stable icon ion-refresh" ng-click="vm.resetToppings()">Reset toppings</i></button>
+      <button class="item button button-balanced icon-right ion-ios-cart" ng-click="vm.showContent(0)">Save</button>
+    </div>
+  </ion-footer-bar>
+</ion-view>

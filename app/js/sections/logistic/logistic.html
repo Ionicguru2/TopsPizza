@@ -1,0 +1,123 @@
+<ion-view view-title="Hello Pizza Lover">
+  <ion-nav-buttons side="left">
+    <button class="button back-button buttons button-clear header-item" ng-click="vm.goBack()">
+      <i class="icon ion-ios-arrow-back"></i>
+    </button>
+  </ion-nav-buttons>
+  <ion-content>
+    <div>
+      <brand-effect/>
+    </div>
+    <div class="list list-inset" ng-form name="h">
+      <h4 class="item">Collection / Delivery</h4>
+      <div class="item row">
+        <div class="col">
+          <ion-list>
+            <ion-radio ng-model="vm.order.info.logistics" ng-value="'delivery'" ng-click="vm.refresh()">Delivery</ion-radio>
+            <ion-radio ng-model="vm.order.info.logistics" ng-value="'collection'" ng-click="vm.refresh()">Collection</ion-radio>
+          </ion-list>
+        </div>
+      </div>
+      <h4 class="item">Order Time</h4>
+      <div class="item row">
+        <div class="col">
+          <label class="item item-input item-select">
+            <div class="input-label">
+              Select Time
+            </div>
+            <select name="orderTime" ng-options="option.value as option.label for option in vm.getTimes" ng-model="vm.order.info.when">
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div class="item item-text-wrap">
+        <p class="padding">
+          Your order will take at least {{vm.order.info.logistics==='delivery'?'45min, we endeavor to deliver as fast as we can':'15min to get ready for collection'}} please note during the store busy time it may take longer
+        </p>
+      </div>
+      <div ng-if="vm.order.info.logistics!=='collection'">
+      <div class="item item-input-inset">
+        <label class="item-input item-stacked-label item-input-wrapper">
+          <span class="input-label">Please enter your postcode</span>
+          <input class="to-uppercase" ng-pattern="/^[A-Za-z0-9 ]+$/" type="text" placeholder="e.g. SW1A 2AA" name="pcode" ng-model="vm.postcode">
+        </label>
+        <button class="button button-large button-assertive" ng-click="vm.searchAddress(vm.postcode)" ng-disabled="!vm.postcode"><i class="icon ion-search"> </i></button>
+      </div>
+
+      <div class="item" ng-show="vm.postAddressList" ng-class="{animated: vm.postAddressList, tada:vm.postAddressList}">
+        <label class="item item-input item-select">
+          <div class="input-label">
+            <i class="icon ion-ios-location-outline"> </i>
+          </div>
+          <select ng-options="postAddress as postAddress.address for postAddress in vm.postAddressList track by postAddress.id" ng-model="vm.selectedPostAddress">
+            <option value="">Please Select Address</option>
+          </select>
+        </label>
+        <button class="button button-full button-balanced" ng-click="vm.changeNewAddress()" ng-show="vm.selectedPostAddress">
+          Add Address
+        </button>
+      </div>
+
+      <div class="item" ng-form="addressForm" ng-show="vm.showAddressForm">
+        <label class="item item-input item-req">
+          <span class="input-label">Name</span>
+          <input type="text" placeholder="address name" ng-model="vm.address.location" required>
+        </label>
+        <label class="item item-input item-req">
+          <span class="input-label">Number</span>
+          <input type="text" placeholder="1" ng-model="vm.address.No">
+        </label>
+
+        <label class="item item-input item-req">
+          <span class="input-label">Street</span>
+          <input type="text" placeholder="40" ng-model="vm.address.address" required>
+        </label>
+
+        <label class="item item-input item-req">
+          <span class="input-label">Post Code</span>
+          <input type="text" placeholder="" ng-model="vm.address.postcode" required>
+        </label>
+
+        <ion-toggle ng-model="vm.address.defaultAddress" toggle-class="toggle-balanced" ng-true-value="'1'" ng-false-value="'0'" ng-if="!vm.firstAdd">Perfected Address</ion-toggle>
+        <label class="item item-input">
+          <span class="input-label">Delivery Instructions</span>
+          <input type="text" placeholder="Please leave your Comments here" ng-model="vm.address.comment">
+        </label>
+        <button class="button button-full button-balanced" ng-click="vm.saveAddress(vm.address)" ng-disabled="!addressForm.$valid">
+          SAVE
+        </button>
+      </div>
+      </div>
+    </div>
+    </div>
+    <div class="item address" ng-if="!vm.showAddressForm && vm.order.info.logistics!=='collection'">
+      <h2>Or Select from the List : </h2>
+    </div>
+    <div class="item address" ng-if="vm.order.info.logistics!=='collection'">
+      <ion-list>
+        <div class="row item item-content item-radio" ng-repeat="address in vm.addressList">
+          <label class="col-80">
+            <input type="radio" name="addressList" ng-model="vm.order.info.address" ng-click="vm.refresh()" ng-value="address" />
+            <div class="radio-content">
+              <div class="item-content">
+                <span>
+                {{address.location}}
+                <br/>
+                <small>{{address.No}} {{address.address}} {{address.postcode}}</small>
+              </span>
+                <i class="col-20 radio-icon disable-pointer-events icon ion-paper-airplane"></i>
+              </div>
+            </div>
+          </label>
+          <a class="pull-right button button-icon icon ion-ios-gear-outline" ng-click="vm.editAddress(address)"></a>
+          <a class="pull-right button button-icon icon ion-ios-trash-outline" ng-click="vm.saveAddress(address, true)"></a>
+        </div>
+      </ion-list>
+    </div>
+    <button class="button button-full button-balanced" ui-sref="tab.checkout" ng-disabled="vm.canNext==false" ng-if="!vm.showAddressForm">
+      <!-- Log user in if its not login-->
+      Proceed to checkout
+    </button>
+  </ion-content>
+</ion-view>

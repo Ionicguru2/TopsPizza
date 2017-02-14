@@ -1,0 +1,48 @@
+<ion-view view-title="Hello Pizza Lover">
+  <ion-nav-buttons side="left">
+    <button class="button back-button buttons button-clear header-item" ng-click="vm.goBack()">
+      <i class="icon ion-ios-arrow-back"></i>
+    </button>
+  </ion-nav-buttons>
+  <ion-content>
+    <div>
+      <brand-effect />
+    </div>
+    <div class="list" ng-class="{animated: vm.deal, bounceInRight:vm.deal}" class="item" ng-hide="customise">
+
+      <div class="item item-text-wrap">
+        <h1>{{::vm.deal.name}} 
+        <span class="price">{{vm.deal.price+vm.deal.addprice | currency:"£"}}</span></h1> 
+        {{vm.deal.description}}
+      </div>
+
+      <div ng-repeat="item in vm.dealItems">
+
+      <div class="item item-button-right item-icon-left" ng-class="{active: vm.isGroupShown(item.id)}">
+        
+        <i class="icon" ng-class="{'ion-checkmark-circled':item.selected ,'ion-plus':!item.selected}"></i>
+        <p ng-click="vm.toggleGroup(item.id)">
+          {{!item.selected?'Please select your ' + item.category : item.selected.name}}
+        </p>
+        <button class="button button-balanced ion-ios-gear-outline" ng-if="item.selected && item.category=='pizza' && !vm.isGroupShown(item.id)" ng-click="vm.customiseProduct(item)"></button>
+
+      </div>
+
+      <ion-list ng-if="item.type=='type' && vm.isGroupShown(item.id)">
+
+            <ion-radio ng-repeat="product in item.items" ng-click="vm.setSelected(item, product, item.id)" ng-model="choice" ng-value="product.id" class="item-thumbnail-left item-text-wrap">
+              <img ng-src="https://topspizza.co.uk/img/products/thumbnail/{{product.id}}.jpg" err-src="img/theme/no-picture.png" alt="{{product.name}}">
+                {{product.name}}
+            </ion-radio>
+
+      </ion-list>
+
+      </div>
+
+
+      <button class="button button-large button-full button-assertive icon-left ion-ios-cart" ng-click="vm.addToOrder()" ng-disabled="vm.allselect < vm.dealItems.length">
+        Add to order
+      </button>
+    </div>
+  </ion-content>
+</ion-view>

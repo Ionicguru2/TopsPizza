@@ -1,0 +1,19 @@
+<ion-view view-title="Hello Pizza Lover">
+  <ion-nav-buttons side="left">
+    <button class="button back-button buttons button-clear header-item" ng-click="vm.goBack()">
+      <i class="icon ion-ios-arrow-back"></i>
+    </button>
+  </ion-nav-buttons>
+  <ion-content>
+    <div><brand-effect /></div>
+    <h4 class="content padding double-padding-x">Toptastic Deals</h4>
+    <div class="list animate-fade-slide-in-right" ng-class="{animated: vm.deals, bounceInUp:vm.deals}">
+      <ion-item class="item item-avatar item-icon-right item-text-wrap" ng-repeat="item in vm.deals | orderBy:'-price' track by item.id" ui-sref="{{vm.selectDeal(item)}}">
+        <img ng-src="https://topspizza.co.uk/img/{{item.id}}.jpg" err-src="img/theme/hat.png">
+        <h2>{{item.name}}</h2>
+        <p>{{item.description}} - {{item.price| currency:"&#163;"}}</p>
+        <i class="icon ion-arrow-right-a muted"></i>
+      </ion-item>
+    </div>
+  </ion-content>
+</ion-view>

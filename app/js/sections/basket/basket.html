@@ -1,0 +1,83 @@
+<ion-view view-title="Hello Pizza Lover">
+  <!--  <ion-nav-bar class="bar-assertive">
+    <ion-nav-back-button></ion-nav-back-button>
+  </ion-nav-bar>-->
+  <ion-content>
+    <div class="hide-on-keyboard-open">
+      <brand-effect />
+    </div>
+    <div class="padding">
+      <button class="button button-full button-balanced" ui-sref="tab.logistic" ng-disabled="vm.order.cart.length == 0">
+        <!-- Log user in if its not login-->
+        Choose the time and the place
+      </button>
+      <h4 class="content double-padding-x">Your Order</h4>
+
+      <div class="list animate-fade-slide-in-right" ng-class="{animated:deals, zoomInDown:deals}">
+        <!-------------- list of cart from order ----------------------->
+        <ion-item class="item item-content  item-text-wrap" ng-repeat="cart in vm.order.cart track by $index">
+          <div class="row">
+            <h2>{{cart.name}}</h2>
+            <h2 class="col text-right">{{cart.price* cart.qty | currency:"£"}}</h2>
+          </div>
+          <div id="dealItems" ng-repeat="items in cart.items track by $index">
+            <!--<pre>{{items | json}}</pre>-->
+            <h3 ng-if="items.id=='halfNhalf'">{{ items.name }}</h3>
+            <div id="itemToppings" ng-repeat="item in items.item track by $index">
+              <!--<pre>{{item | json}}</pre>-->
+              <h4>{{ item.name }}</h4>
+              <p ng-show="item.type == 'pizza'||item.type == 'drink'">Size: {{ items.size }}</p>
+              <p ng-show="item.type == 'pizza' && (!item.addinfo.toppings || item.addinfo.toppings.length == 0)"> No Changes </p>
+              <p ng-init="value = vm.getbase(item)" ng-show="value">
+                Base: {{ value.name }}
+              </p>
+
+              <div ng-init="arr = vm.getToppings(item)">
+                <div ng-repeat="it in arr track by it.id">
+                  <p ng-show="it.qty > 0">{{ it.name }} {{ it.qty==2?'++':'+' }}</p>
+
+                  <p ng-show="it.qty < 0">{{it.name}} -</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <qty id="cart.id" name="cart.id" value="cart.qty" ng-click="vm.calcPrice()" dis="cart.deal == '54'" />
+            </div>
+            <a class="pull-right button button-icon icon  ion-ios-gear-outline" ng-click="vm.customiseCart($index)"></a>
+            <a class="pull-right button button-icon icon ion-ios-trash-outline" ng-click="vm.delItem($index)"></a>
+          </div>
+        </ion-item>
+        <!--------------------------------------------------------------->
+
+        <div class="item" ng-show="vm.addon">
+          <!-- <img src="https://topspizza.co.uk/img/theme/hat.png">-->
+
+          <div class="row link" ng-click="vm.customiseCart($index)">
+            <h2 class="col">{{vm.addon.name}}</h2>
+
+            <h2 class="col text-right">{{vm.addon.price* vm.addon.qty | currency:"£"}}</h2>
+          </div>
+        </div>
+        <!--------------------------------------------------------------->
+        <div class="item">
+          <h2>
+            <div class="row">
+              <div class="col-50">Total</div>
+              <div class="col-50 text-right">{{vm.sum | currency:"£"}}</div>
+            </div>
+          </h2>
+          <small class="wrap" ng-show="vm.sum > 250">
+            Unfortunately, you've exceeded our online purchase limit of &pound;250. To place your order, remove an item, or telephone the store on [{{vm.store.name}}]
+          </small>
+        </div>
+        <button class="button button-full button-balanced" ui-sref="tab.logistic" ng-disabled="vm.order.cart.length == 0">
+          <!-- Log user in if its not login-->
+          Choose the time and the place
+        </button>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

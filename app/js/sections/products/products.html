@@ -1,0 +1,29 @@
+<ion-view view-title="Hello Pizza Lover">
+  <ion-nav-buttons side="left">
+    <button class="button back-button buttons button-clear header-item" ng-click="vm.goBack()">
+      <i class="icon ion-ios-arrow-back"></i>
+    </button>
+  </ion-nav-buttons>
+  <ion-content lazy-scroll>
+    <ion-item class="item item-avatar item-icon-right item-text-wrap"
+              nav-direction="forward"
+              ui-sref="tab.halfNhalf"
+              ng-show="vm.ishalfNhalf==true && vm.category=='pizza'">
+      <img image-lazy-src="https://topspizza.co.uk/img/products/thumbnail/halfNhalf.jpg" err-src="img/theme/no-picture.png">
+      <h2>Half & half pizza</h2>
+      <small>Pizza made of two pizza</small>
+      <div class="icon ion-arrow-right-a muted"></div>
+    </ion-item>
+
+    <ion-item class="item item-avatar item-icon-right item-text-wrap"
+    ng-repeat="item in vm.menu | filter: {'category':vm.category} | orderBy:'TyID'"
+    nav-direction="forward"
+    ui-sref="{{vm.selectproduct(item)}}">
+          <img image-lazy-src="https://topspizza.co.uk/img/products/thumbnail/{{::item.id}}.jpg" err-src="img/theme/no-picture.png">
+  				<h2>{{item.name}}</h2>
+  				<small>{{item.description}} {{ item | basePrice}}</small>
+  				<div class="icon ion-arrow-right-a muted"></div>
+  	</ion-item>
+
+  </ion-content>
+</ion-view>

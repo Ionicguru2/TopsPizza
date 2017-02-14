@@ -1,0 +1,12 @@
+<div class="tribox">
+
+    <input id="{{topping.id}}-none" type="radio" name="{{topping.name}}" ng-click="changeQty(topping)" ng-model="topping.qty" ng-value="0"/>
+    <label for="{{topping.id}}-none" ng-show="topping.qty == 2" class="none">{{topping.name}}</label>
+
+    <input id="{{topping.id}}-single" type="radio" name="{{topping.name}}" ng-click="changeQty(topping)" ng-model="topping.qty" ng-value="1" />
+    <label for="{{topping.id}}-single" ng-show="!topping.qty || topping.qty==0" class="single">{{topping.name}}</label>
+
+    <input id="{{topping.id}}-double" type="radio" name="{{topping.name}}" ng-click="changeQty(topping)" ng-model="topping.qty" ng-value="2" />
+    <label for="{{topping.id}}-double" ng-show="topping.qty == 1" class="double">{{topping.name}}</label>
+
+</div>

@@ -1,0 +1,38 @@
+.product {
+    display: block;
+    height: 350px;
+    overflow: hidden;
+    padding: 0;
+    position: relative;
+}
+.enlarge {
+    overflow:visible;
+    height: auto;
+    margin-bottom: -6px;
+}
+
+.enlarge div{
+     bottom: 5px!important;
+}
+
+
+.product img {
+    width: 100%;
+}
+
+.product div
+{
+    background-color: rgba(0,0,0,0.3);
+    left: 0;
+    padding: 1.25em;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+.product p, .product h1{
+    color:#FFF;
+    margin: 0!important;
+}
+.prod-nav-bar{
+  height: 66px !important;
+}

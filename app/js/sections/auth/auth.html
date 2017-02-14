@@ -1,0 +1,48 @@
+<ion-view view-title="Hello Pizza Lover">
+  <ion-nav-buttons side="left">
+    <button class="button back-button buttons button-clear header-item" ng-click="vm.goBack()">
+      <i class="icon ion-ios-arrow-back"></i>
+    </button>
+  </ion-nav-buttons>
+	<ion-content>
+		<div>
+			<brand-effect />
+		</div>
+		<div id="fb-root"></div>
+		<form name="loginForm" ng-submit="vm.loginUser()">
+			<div class="padding">
+				<div class="list">
+					<label class="row item item-input">
+            <i class="icon ion-ios-email placeholder-icon"></i>
+						<input type="email" name="email" ng-model="vm.username" placeholder="Email" required>
+					</label>
+					<div ng-show="loginForm.$submitted || loginForm.email.$touched" class="error-message">
+						<span ng-show="loginForm.email.$error.required">Please enter your email</span>
+						<span ng-show="loginForm.email.$error.email">This is not a valid email.</span>
+					</div>
+					<label class="row item item-input">
+            <i class="icon ion-key placeholder-icon"></i>
+						<input type="password" name="password" ng-model="vm.password" placeholder="Password" required>
+					</label>
+					<div ng-show="loginForm.$submitted || loginForm.email.$touched" class="error-message">
+						<span ng-show="loginForm.password.$error.required">Please enter your password</span>
+					</div>
+					<div class="row">
+						<button type="submit" class="button button-full button-assertive button-flat col">Login</button>
+					</div>
+					<div class="row">
+						<button ui-sref="tab.forgotPassword" class="button button-clear col">Forgot Password</button>
+						<button ui-sref="tab.sigUp" class="button button-clear col">Sign up</button>
+					</div>
+				</div>
+			</div>
+			<div class="padding">
+				<h2>Or via Facebook</h2>
+				<hr>
+				<button type="button" class="button icon-left ion-social-facebook button-positive button-full button-flat" ng-click="vm.loginFacebook()">
+					Login with Facebook
+				</button>
+			</div>
+		</form>
+	</ion-content>
+</ion-view>

@@ -1,0 +1,17 @@
+<ion-view view-title="Hello Pizza Lover">
+  <ion-content>
+    <div><brand-effect /></div>
+    <h4 class="content padding double-padding-x">Menu</h4>
+    <div class="list animate-fade-slide-in-right" ng-class="{animated: vm.menuItems, bounceInUp:vm.menuItems}">
+      <a class="item item-avatar item-icon-right"
+        ng-repeat="menuItem in vm.menuItems"
+        ng-if="menuItem.t=='m'"
+        nav-direction="forward"
+        ui-sref="{{vm.selectType(menuItem.h)}}">
+        <img ng-src="img/theme/hat.png" alt="{{menuItem.n}}">
+				<h2>{{menuItem.n}}</h2>
+				<i class="icon ion-arrow-right-a muted"></i>
+      </a>
+    </div>
+  </ion-content>
+</ion-view>

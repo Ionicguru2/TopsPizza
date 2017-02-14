@@ -1,0 +1,51 @@
+<ion-view view-title="{{vm.title}}">
+  <ion-nav-buttons side="left">
+    <button class="button back-button buttons button-clear header-item" ng-click="vm.goBack()">
+      <i class="icon ion-ios-arrow-back"></i>
+    </button>
+  </ion-nav-buttons>
+  <ion-content>
+    <div class="content">
+      <div>
+        <brand-effect />
+      </div>
+      <ion-list>
+        <ion-item>
+
+          <ion-label color="primary" fixed>Cardholder's name</ion-label>
+          <ion-input name="name" type="text" model="vm.card.name" icon="ion-ios-contact placeholder-icon"></ion-input>
+
+          <ion-label color="primary" fixed>Card number</ion-label>
+          <ion-input name="number" type="number" model="vm.card.number" icon="ion-card placeholder-icon"></ion-input>
+
+          <ion-label color="primary" fixed>Expiry Date</ion-label>
+          <div class="row">
+            <div class="form-group col col-50">
+              <label class="item item-input item-select item-req">
+                  <div class="input-label">
+                    Month&nbsp;
+                  </div>
+                  <select name="month" ng-options="month for month in vm.monthes" ng-model="vm.card.exp_month"></select>
+                </label>
+            </div>
+            <div class="form-group col col-50">
+              <label class="item item-input item-select item-req">
+                  <div class="input-label">
+                    Year&nbsp;
+                  </div>
+                  <select name="year" ng-options="year for year in vm.years" ng-model="vm.card.exp_year"></select>
+                </label>
+            </div>
+          </div>
+
+          <ion-label color="primary" fixed>CVV</ion-label>
+          <ion-input name="cvc" type="number" model="vm.card.cvc"></ion-input>
+        </ion-item>
+        <div class="row">
+            <button type="submit" class="button button-full button-balanced ink" ng-disabled="vm.disabled" ng-click="vm.submitOrder()">Pay Now
+              {{vm.total.sum | currency:"£"}}</button>
+        </div>
+      </ion-list>
+    </div>
+  </ion-content>
+</ion-view>

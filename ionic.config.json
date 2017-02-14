@@ -1,0 +1,11 @@
+{
+  "name": "app",
+  "app_id": "co.uk.topspizza.mobile",
+  "browsers": [
+    {
+      "platform": "android",
+      "browser": "crosswalk",
+      "version": "12.41.296.5"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+<ion-view view-title="Hello Pizza Lover" class="stores">
+  <ion-content>
+
+    <h4 class="content padding double-padding-x">Stores</h4>
+    <div class="list animate-fade-slide-in-right"  ng-class="{animated: vm, bounceInUp:vm}">
+      <ion-item class="item item-avatar item-icon-right item-text-wrap"
+        ng-repeat="store in vm.allStores"
+        ng-if="store.active!=0"
+        ng-click="vm.setStore(store)"
+        >
+        <img src="img/theme/hat.png">
+				<h2 ng-class="{animated:store, fadeIn:store}">{{store.name}}
+				  <div class="openingTime"><span>{{store | openingTime}}</span></div>
+				</h2>
+				{{store.address}}, {{store.postcode}}
+				<i class="icon ion-arrow-right-a muted"></i>
+      </ion-item>
+    </div>
+  </ion-content>
+</ion-view>

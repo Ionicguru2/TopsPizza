@@ -1,0 +1,22 @@
+<div class="hero large-hero">
+    <div class="content">
+        <div class="avatar" ng-click="more =! more"></div>
+        <div ng-show="store.halal==1" class="halal">HALAL</div>
+        <h3 class="light" ng-click="more =! more">{{store.name}}</h3>
+        <span ng-hide="more" class="more" ng-click="more =! more">More Info</span>
+        <div ng-show="more" ng-class="{animated:more, bounceIn:more}">
+            <h4 class="more">{{store.address}}<br />{{store.postcode}}</h4>
+            <h4>
+
+                <a href="tel:{{store.tel}}" class="pull-left button button-small button-clear button-light"><i class="icon ion-ios-telephone-outline"></i> Call us</a>
+                <button ng-click="showMap()" class="pull-left button button-small button-clear button-light"><i class="icon ion-map"></i> Map</button>
+                <button ng-click="openning =!openning" class="pull-left button button-small button-clear button-light"><i class="icon ion-clock"></i> Opening hours</button>
+
+                <div ng-show="openning" ng-class="{animated:openning, bounceIn:openning}" id="OpenTimes" ng-repeat="weekday in weekdays track by $index">
+                 <p class="more">{{ weekday.day }}: {{ weekday.time }}</p>
+                </div>
+            </h4>
+            <button class="more button button-small button-clear button-light" ng-click="more =! more">Less Info</button>
+        </div>
+    </div>
+</div>

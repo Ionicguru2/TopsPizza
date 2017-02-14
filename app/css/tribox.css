@@ -1,0 +1,47 @@
+.tribox input[type="radio"] {
+    display:none;
+}
+.tribox label {
+    display:inline-block;
+    width:100%;
+    font-family:Arial;
+    font-size:14px;
+}
+/*
+    This shows when the qty is two
+*/
+.tribox .none:after{
+    /* 2 */
+    display: inline-block;
+    content: "";
+    width: 32px;
+    height: 16px;
+    margin:0 0 -2px 5px;
+    background: transparent url('../img/theme/Icon-16.png');
+}
+/*
+    This shows when the qty is zero
+*/
+.tribox .single:before {
+
+    display: inline-block;
+    content: "";
+    margin:0px 5px -2px 0;
+    border:1px solid #ddd;
+    width:14px;
+    height:14px;
+
+
+}
+/*
+    This shows when the qty is one
+*/
+.tribox .double:after {
+    /* 1 */
+    display: inline-block;
+    content: "";
+    width: 16px;
+    height: 16px;
+    margin:0 0 -2px 5px;
+    background: transparent url('../img/theme/Icon-16.png');
+}

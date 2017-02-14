@@ -1,0 +1,51 @@
+<ion-view view-title="{{vm.title}}">
+  <ion-nav-buttons side="left">
+    <button class="button back-button buttons button-clear header-item" ng-click="vm.goBack()">
+      <i class="icon ion-ios-arrow-back"></i>
+    </button>
+  </ion-nav-buttons>
+    <ion-content scroll="true">
+        <div class="hide-on-keyboard-open">
+            <brand-effect />
+        </div>
+
+        <div class="list">
+            <form name="udpateUserForm" ng-submit="udpateUserForm.$valid && vm.update()">
+                <div class="row">
+                    <div class="col">
+                        <ion-input placeholder="First Name" model="vm.user.firstName" type="text" removelable="true" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <ion-input placeholder="First Name" model="vm.user.lastName" type="text" removelable="true" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                      <label class="item item-input item-req">
+                        <input type="tel" ng-model="vm.user.tel" placeholder="Telephone" ng-pattern="/^0\d{10,}$/">
+                      </label>
+                      <!--  <ion-input addclass="item-req" placeholder="Telephone" model="vm.user.tel" type="tel" removelable="true"/>-->
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                      <label class="item item-input item-req">
+                        <input type="tel" ng-model="vm.user.mobile" placeholder="Telephone" ng-pattern="/^0\d{10,}$/">
+                      </label>
+                        <!--<ion-input placeholder="Mobile" addclass="item-req" model="vm.user.mobile" type="tel" removelable="true" ng-pattern="/^0\d{10,}$/"/>-->
+                    </div>
+                </div>
+
+                <div class="padding">
+                    <button type="submit" class="button button-full button-balanced ink" ng-disabled="udpateUserForm.$invalid">Save</button>
+                </div>
+            </form>
+        </div>
+
+    </ion-content>
+</ion-view>

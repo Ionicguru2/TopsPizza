@@ -1,0 +1,4 @@
+.qty {width:124px;}
+.qty input {width:30px;}
+.qty button { margin:-7px -15px;}
+.qty button, .qty input { float:left;  text-align:center;}

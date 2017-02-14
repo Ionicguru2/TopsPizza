@@ -1,0 +1,27 @@
+<ion-view view-title="Hello Pizza Lover">
+
+
+
+  <ion-content>
+    <div><brand-effect /></div>
+
+    <div class="list" ng-class="{animated: vm, bounceInUp:vm}">
+      <a class="item" ui-sref="tab.locator">Find store</a>
+      <a class="item" nav-direction="forward" ui-sref="tab.deals">Store Deals</a>
+      <a class="item" nav-direction="forward" ui-sref="tab.menu">Store Menu</a>
+      <a class="item" nav-direction="forward" ui-sref="tab.loyalty">Loyality</a>
+      <a class="item" nav-direction="forward" ui-sref="tab.tracker">Order tracker</a>
+      <a class="item" nav-direction="forward" ui-sref="tab.history">Order history</a>
+      <a class="item" ui-sref="tab.stores" nav-direction="forward">List of Stores</a>
+      <a class="item" nav-direction="forward" ui-sref="tab.auth" ng-if="!vm.isLoggedIn">Sign up / Sign in</a>
+      <a class="item" nav-direction="forward" ui-sref="tab.profile" ng-if="vm.isLoggedIn">My Account</a>
+      <a class="item" nav-direction="forward" ng-click="vm.logout()" ng-if="vm.isLoggedIn">Log Out</a>
+      <a class="item" nav-direction="forward" ui-sref="tab.chane_password" ng-if="vm.isLoggedIn">Change Password</a>
+      <span class="item item-divider">Legals</span>
+      <a class="item" ui-sref="tab.terms" nav-direction="forward">Terms &amp; Conditions</a>
+      <a class="item" ui-sref="tab.privacy" nav-direction="forward">Privacy Policy</a>
+
+    </div>
+
+  </ion-content>
+</ion-view>

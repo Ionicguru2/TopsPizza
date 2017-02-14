@@ -1,0 +1,30 @@
+<html>
+<head>
+  <script language="Javascript">
+    function submitForm() {
+      var data = this.parent.data;
+      var PaReq = document.getElementById('PaReq');
+      var TermUrl = document.getElementById('TermUrl');
+      var MD = document.getElementById('MD');
+      var url = document.getElementById('acsform').action = data.url;
+      PaReq.value = data.PaReq;
+      TermUrl.value = data.respond;
+      MD.value = data.order;
+      document.acsform.submit();
+    }
+  </script>
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="-1">
+</head>
+
+<body onLoad="submitForm()">
+  Please wait ...
+  <form name="acsform" id="acsform" method="POST" action="URL">
+    <input type="hidden" name="PaReq" id="PaReq" value="">
+    <input type="hidden" name="TermUrl" id="TermUrl" value="">
+    <input type="hidden" name="MD" id="MD" value="">
+    <input type="submit" value="Submit">
+  </form>
+</body>
+
+</html>

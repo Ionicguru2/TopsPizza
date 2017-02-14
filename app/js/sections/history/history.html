@@ -1,0 +1,19 @@
+<ion-view view-title="Hello Pizza Lover">
+  <ion-content>
+    <div>
+      <brand-effect />
+    </div>
+    <div class="padding">
+<ion-list>
+  <ion-item ng-repeat="order in vm.history">  <!--class="item-thumbnail-left"-->
+    <h3>{{order.type | capitalize}} Order No. {{order.OrID}} - {{order.name}}</h3>
+    <p>{{ order.order_time | myFilter:'yyyy-MM-dd HH:mm'}}</p>
+    <div ng-if="order.payment=='card'" class="badge badge-assertive">Paid Online</div>
+    <p ng-show="order.type === 'delivery'">{{ order.address }} {{ order.postcode }}</p>
+    <h3>  Total - {{ order.total | currency:"£"}}</h3>
+  </ion-item>
+</ion-list>
+
+    </div>
+  </ion-content>
+</ion-view>

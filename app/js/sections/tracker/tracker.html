@@ -1,0 +1,16 @@
+<ion-view view-title="Hello Pizza Lover">
+  <ion-nav-buttons side="left">
+    <button class="button back-button buttons button-clear header-item" ng-click="vm.goBack()">
+      <i class="icon ion-ios-arrow-back"></i>
+    </button>
+  </ion-nav-buttons>
+  <ion-content>
+    <div>
+      <brand-effect />
+    </div>
+    <div class="padding">
+        <img src="img/theme/delivery.png" width="100%">
+        <h4 class="content double-padding-x" ng-show="vm.message">{{vm.message}}</h4>
+        </div>
+  </ion-content>
+</ion-view>

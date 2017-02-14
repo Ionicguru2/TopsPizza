@@ -1,0 +1,82 @@
+<ion-view view-title="Hello Pizza Lover">
+  <ion-nav-buttons side="left">
+    <button class="button back-button buttons button-clear header-item" ng-click="vm.goBack()">
+      <i class="icon ion-ios-arrow-back"></i>
+    </button>
+  </ion-nav-buttons>
+  <ion-content>
+    <div>
+      <brand-effect />
+    </div>
+    <button type="submit" class="button button-full button-dark" ui-sref="tab.basket">Edit your order</button>
+    <div class="list animate-fade-slide-in-right" ng-class="{animated:deals, zoomInDown:deals}">
+      <div class="animate-fade-slide-in-right" ng-class="{animated:deals, zoomInDown:deals}">
+        <h1 class="item">Your Order</h1>
+        <!-- list of cart from order -->
+        <ion-item class="item" ng-repeat="cart in vm.order.cart track by $index">
+          <div class="row">
+            <h2 class="col col-80 item-text-wrap">{{cart.name}}</h2>
+            <i class="col pull-right">{{cart.price* cart.qty | currency:"£"}}</i>
+          </div>
+          <div class="row" ng-repeat="items in cart.items track by $index">
+            <div class="col">
+              <div id="itemToppings" ng-repeat="item in items.item track by $index">
+                {{::(item.name)? '> ' + item.name:''}}
+                <p ng-show="item.type == 'pizza'||item.type == 'drink'">Size: {{ items.size }}</p>
+                <p ng-show="item.type == 'pizza' && (!item.addinfo.toppings || item.addinfo.toppings.length == 0)"> No Changes </p>
+                <p ng-init="value = vm.getbase(item)" ng-show="value">
+                  Base: {{ value.name }}
+                </p>
+                <div ng-init="arr = vm.getToppings(item)">
+                  <div ng-repeat="it in arr track by it.id">
+                    <p ng-show="it.qty > 0">{{it.name}} {{it.qty==2?'++':'+'}}</p>
+                    <p ng-show="it.qty < 0">{{it.name}} -</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ion-item>
+        <ion-item>
+          <div class="row" ng-if="vm.total.price && vm.total.price !== vm.total.sum">
+            <span class="col col-80 item-text-wrap">Subtotal</span>
+            <i class="col pull-right">{{vm.total.price | currency:"£"}}</i>
+          </div>
+          <div class="row" ng-if="vm.total.discount">
+            <span class="col col-80 item-text-wrap">Discount</span>
+            <i class="col pull-right">-{{vm.total.discount | currency:"£"}}</i>
+          </div>
+          <div class="row" ng-if="vm.total.delivery">
+            <span class="col col-80 item-text-wrap">Delivery Charge</span>
+            <i class="col pull-right">{{vm.total.delivery | currency:"£"}}</i>
+          </div>
+          <div class="row">
+            <h2 class="col col-80 item-text-wrap">Total</h2>
+            <i class="col pull-right">{{vm.total.sum | currency:"£"}}</i>
+          </div>
+        </ion-item>
+        <div ng-if="vm.order.info.address">
+          <span class="item item-text-wrap">
+            <p>Delivery Address: {{ vm.order.info.address.address + ' ' + vm.order.info.address.postcode }}</p>
+            <br />
+            <p ng-if="vm.order.info.when">Estimated arrival Time: {{ vm.order.info.when | orderTime}}</p>
+          </span>
+        </div>
+        <div class="item item-input-inset">
+          <label class="item-input item-stacked-label item-input-wrapper">
+            <span class="input-label" ng-if="!removelable">Voucher ? </span>
+            <input type="text" id="voucher" name="voucher" ng-model="vm.voucherInput" placeholder="Just enter it here" ng-disabled="vm.order.info.voucher">
+          </label>
+          <button class="button button-large" ng-click="vm.voucherEvent()" ng-class="vm.order.info.voucher?'button-assertive':'button-balanced'"><i class="icon" ng-class="vm.order.info.voucher?'ion-close':'ion-plus'"> </i></button>
+        </div>
+        <h2 class="item">Choose Payment</h2>
+        <ion-list>
+          <ion-radio ng-value="'card'" ng-model="vm.payment">Credit Card</ion-radio>
+          <ion-radio ng-value="'cash'" ng-model="vm.payment">Cash</ion-radio>
+        </ion-list>
+        <button class="button button-full button-balanced" ng-click="vm.tracking()">
+          {{vm.payment==='cash'?'Place your Order':'Make Payment'}}
+        </button>
+      </div>
+  </ion-content>
+</ion-view>
